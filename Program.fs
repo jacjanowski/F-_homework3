@@ -10,7 +10,7 @@ module hw03
 //
 let rec length L =
     match L with
-    | head :: tail -> 1 + length tail
+    | head :: tail -> 1 + length tail   //add 1 for every index until we reach the end of list.
     |[] -> 0
 
 //
@@ -21,7 +21,7 @@ let rec length L =
 //
 let rec sum L =
     match L with
-    | head :: tail -> head + sum tail
+    | head :: tail -> head + sum tail   //add the first element be added to rest of list. Then second element + end of list, etc.
     |[] -> 0
 
 //
@@ -31,7 +31,16 @@ let rec sum L =
 // You will need to convert ints to floats before dividing the sum by length to find the average.
 // Example: average [15;8;25;17;12] => 15.4
 //
-//let rec average L =
+let average L =
+    let rec accumulate (sum, count : float) list =
+        match list with
+        | head::tail -> accumulate (sum + head, count + 1.0) tail
+        | [] -> (sum, count)
+    let sum, count = accumulate (0.0, 0.0) L
+    let average = sum / count
+    average
+    
+
 
 
 [<EntryPoint>]
@@ -52,7 +61,7 @@ let main argv =
     let total = sum values
     printfn "%A" total
     //
-   // let avg = average values
-   // printfn "%A" avg
+    let avg = average values
+    printfn "%A" avg
     //
     0
