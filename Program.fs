@@ -10,7 +10,7 @@ module hw03
 //
 let rec length L =
     match L with
-    | head :: tail -> head + length tail
+    | head :: tail -> 1 + length tail
     |[] -> 0
 
 //
@@ -19,7 +19,10 @@ let rec length L =
 // Computes the sum of the values in a list of integers.
 // Example: sum [15;8;25;17;12] => 77
 //
-//let rec sum L =
+let rec sum L =
+    match L with
+    | head :: tail -> head + sum tail
+    |[] -> 0
 
 //
 // average
@@ -46,8 +49,8 @@ let main argv =
     let len = length values
     printfn "%A" len
     //
-    //let total = sum values
-   // printfn "%A" total
+    let total = sum values
+    printfn "%A" total
     //
    // let avg = average values
    // printfn "%A" avg
