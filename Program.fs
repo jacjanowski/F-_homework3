@@ -1,5 +1,9 @@
 ﻿#light
 
+
+//Jacob Janowski - 672941241
+//jjanow7
+//Homework 3: compute the sum, length of array, and average of the given values listed within data.txt.
 module hw03
 
 //
@@ -32,13 +36,13 @@ let rec sum L =
 // Example: average [15;8;25;17;12] => 15.4
 //
 let average L =
-    let rec accumulate (sum, count : float) list =
+    let rec add (sum, count : float) list =             //inner function call to 'add()' which will take the head of list every iteration and add it to 'sum'.
         match list with
-        | head::tail -> accumulate (sum + head, count + 1.0) tail
-        | [] -> (sum, count)
-    let sum, count = accumulate (0.0, 0.0) L
-    let average = sum / count
-    average
+        | head::tail -> add (sum + head, count + 1.0) tail
+        | [] -> (sum, count)                            //if empty list, return sum ,count
+    let sum, count = add (0.0, 0.0) L
+    let average = sum / count       //average will equal our floated values of sum / count.
+    average     //return
     
 
 
@@ -49,10 +53,12 @@ let main argv =
     let filename   = System.Console.ReadLine()
     let data_array = System.IO.File.ReadAllLines(filename)
     let data_list  = Array.toList data_array
+    let data_list2  = Array.toList data_array       //convert data_array to flaoted values.
     //
     // convert strings to integers:
     //
     let values = List.map (fun s -> int s) data_list
+    let values2 = List.map (fun s -> float s) data_list2            //initialize map of floated values.
     printfn "%A" values
     //
     let len = length values
@@ -61,7 +67,7 @@ let main argv =
     let total = sum values
     printfn "%A" total
     //
-    let avg = average values
+    let avg = average values2       //use floated values.
     printfn "%A" avg
     //
-    0
+    0                                  
